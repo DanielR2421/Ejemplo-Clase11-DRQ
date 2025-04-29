@@ -27,14 +27,35 @@ Bases de datos
  */
 
 Table table;
+int nSamples;
+float[] appUsageTime;
+float[] screenOnTime;
 
 void setup() {
+  size(1000, 1000);
+  background(0);
+
+  //Cargar los datos
   table = loadTable("user_behavior_dataset.csv", "header");
   //println(table.getRowCount());
 
-  for (TableRow row : table.rows()) {
-    int userId = row.getInt("User ID");
+  //Guardar el número de filasen la tabla
+  nSamples = table.getRowCount();
 
-    println("User " + userId);
+  //Inicializamos los arrays
+  appUsageTime = new float[nSamples];
+  screenOnTime = new float[nSamples];
+
+  //Asignamos los datos: el for loop hace esto mas rapido y varias veces del totazo
+  //appUsageTime[0] = table.getFloat(i, "App Usage Time (min/day)");
+  //appUsageTime[1] = table.getFloat(i, "App Usage Time (min/day)");
+  //appUsageTime[1] = table.getFloat(i, "App Usage Time (min/day)");
+  //...
+  
+  //Asignamos los datos
+  
+  for (int i = 0; i <= nSamples; i++) {
+    appUsageTime[i] = table.getFloat(i, "App Usage Time (min/day)");
+    screenOnTime[i] = table.getFloat(i, "Screen On Time (hours/day)");
   }
 }
