@@ -54,7 +54,7 @@ void setup() {
   
   //Asignamos los datos
   
-  for (int i = 0; i <= nSamples; i++) {
+  for (int i = 0; i < nSamples; i++) {
     appUsageTime[i] = table.getFloat(i, "App Usage Time (min/day)");
     screenOnTime[i] = table.getFloat(i, "Screen On Time (hours/day)");
   }
