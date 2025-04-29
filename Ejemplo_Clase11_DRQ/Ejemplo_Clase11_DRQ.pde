@@ -31,6 +31,9 @@ int nSamples;
 float[] appUsageTime;
 float[] screenOnTime;
 
+float[] batteyDrain;
+float[] numberOfappsInstalled;
+
 void setup() {
   size(1000, 1000);
 
@@ -45,11 +48,19 @@ void setup() {
   appUsageTime = new float[nSamples];
   screenOnTime = new float[nSamples];
 
+  //Ejemplo mio
+  batteyDrain = new float[nSamples];
+  numberOfappsInstalled = new float[nSamples];
+
+
   //Asignamos los datos
 
   for (int i = 0; i < nSamples; i++) {
     appUsageTime[i] = table.getFloat(i, "App Usage Time (min/day)");
     screenOnTime[i] = table.getFloat(i, "Screen On Time (hours/day)");
+
+    batteyDrain[i] = table.getFloat(i, "Battery Drain (mAh/day)");
+    numberOfappsInstalled[i] = table.getFloat(i, "Number of Apps Installed");
   }
 }
 
@@ -57,14 +68,28 @@ void draw() {
   background(0);
 
   for (int i = 0; i < nSamples; i++) {
-//                value         start1   stop1            start2   stop2
-    float x = map(appUsageTime[i], 0,    max(appUsageTime), 0,     width);
-    float y = map(screenOnTime[i], 0,    max(screenOnTime), height,     0);
-    
+    //                value         start1   stop1            start2   stop2
+    float x = map(appUsageTime[i], 0, max(appUsageTime), 0, width);
+    float y = map(screenOnTime[i], 0, max(screenOnTime), height, 0);
+
     float rectWidth = 10;
     float rectHeight = 10;
-    
-    fill(random(100, 255) , random (0, 100), random(50, 80));
+
+    fill(random(100, 255), random (0, 100), random(50, 80));
     rect(x, y, rectWidth, rectHeight);
+  }
+
+//Ejemplo bio
+  for (int h = 0; h < nSamples; h++) {
+    float x1 = map(batteyDrain[h], 0, max(batteyDrain), 0, width);
+    float y1 = map(numberOfappsInstalled[h], 0, max(numberOfappsInstalled), height, 0);
+  
+   float rectWidth1 = 10;
+    float rectHeight1 = 10;
+  
+  fill(random(0, 150), random (0, 200), random(90, 175));
+    ellipse(x1, y1, rectWidth1, rectHeight1);
+  
+  
   }
 }
